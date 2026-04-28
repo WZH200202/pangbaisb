@@ -1,8 +1,9 @@
-// ===== Hanime 提取完整视频链接 =====
+// ===== Hanime 自动刷新链接 + 播放 =====
 
-let finalUrl = "";
+let url = "";
 
 try {
+
     if (typeof $response !== "undefined") {
         let body = $response.body || "";
 
@@ -11,26 +12,23 @@ try {
 
         if (matches && matches.length > 0) {
 
-            // 优先 1080
+            // 每次都重新选（避免用旧的）
             let best = matches.find(x => x.includes("1080")) 
                     || matches.find(x => x.includes("720")) 
                     || matches[0];
 
-            finalUrl = best;
+            url = best;
         }
     }
 
-    // 输出
-    if (finalUrl) {
-        console.log("🎬 视频链接: " + finalUrl);
+    if (url) {
 
-        $notify(
-            "Hanime解析成功",
-            "已获取完整视频链接",
-            finalUrl
-        );
-    } else {
-        console.log("❌ 未找到视频链接");
+        let scheme = "senplayer://play?url=" + encodeURIComponent(url) + "&referer=https://hanime1.me";
+
+        $notify("Hanime", "已刷新视频链接（1080P）", url);
+
+        // 👉 直接播放（实时新链接）
+        $openURL(scheme);
     }
 
 } catch (e) {
