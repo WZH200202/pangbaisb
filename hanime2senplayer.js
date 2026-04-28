@@ -1,4 +1,4 @@
-// ===== 带分辨率识别 =====
+// ===== Hanime → SenPlayer（稳定跳转+分辨率）=====
 
 let url = "";
 let quality = "";
@@ -24,12 +24,22 @@ try {
     }
 
     if (url) {
-        let scheme = "senplayer://play?url=" + encodeURIComponent(url);
 
-        $notify("Hanime", "当前分辨率：" + quality, url);
-        $openURL(scheme);
+        // ✅ 必加 referer（否则很多时候播放失败）
+        let scheme = "senplayer://play?url=" 
+            + encodeURIComponent(url) 
+            + "&referer=https://hanime1.me";
+
+        $notify("Hanime", "跳转 SenPlayer（" + quality + "）", url);
+
+        // ✅ 延迟一下再跳（提高成功率）
+        setTimeout(() => {
+            $openURL(scheme);
+        }, 300);
     }
 
-} catch (e) {}
+} catch (e) {
+    console.log("error: " + e);
+}
 
 $done({});
