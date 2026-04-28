@@ -29,9 +29,9 @@ try {
         let scheme = "senplayer://play?url=" 
             + encodeURIComponent(url) ;
 
-       // $notify("Hanime", "跳转 SenPlayer（" + quality + "）", url);
+       $notify("Hanime", "跳转 SenPlayer（" + quality + "）", url);
 
-          $openURL(scheme);
+          ,scheme;
         
     }
 
