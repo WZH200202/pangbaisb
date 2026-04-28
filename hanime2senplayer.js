@@ -31,10 +31,8 @@ try {
 
         $notify("Hanime", "跳转 SenPlayer（" + quality + "）", url);
 
-        // ✅ 延迟一下再跳（提高成功率）
-        setTimeout(() => {
-            $openURL(scheme);
-        }, 300);
+          $openURL(scheme);
+        
     }
 
 } catch (e) {
