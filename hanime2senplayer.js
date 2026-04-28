@@ -1,43 +1,43 @@
-// ===== Hanime → SenPlayer（稳定跳转+分辨率）=====
+// ===== Hanime → SenPlayer（MP4直链优化版）=====
 
 let url = "";
-let quality = "";
 
 try {
+
+    // 1️⃣ 从 HTML 抓所有 mp4
     if (typeof $response !== "undefined") {
         let body = $response.body || "";
 
         let matches = body.match(/https?:\/\/[^"'\\]+\.mp4[^"'\\]*/g);
 
         if (matches && matches.length > 0) {
-
+            // 👉 优先选1080
             let best = matches.find(x => x.includes("1080")) 
                     || matches.find(x => x.includes("720")) 
                     || matches[0];
 
             url = best;
-
-            if (url.includes("1080")) quality = "1080P";
-            else if (url.includes("720")) quality = "720P";
-            else if (url.includes("480")) quality = "480P";
         }
     }
 
+    // 2️⃣ request兜底
+    if (!url && typeof $request !== "undefined") {
+        if ($request.url.includes(".mp4")) {
+            url = $request.url;
+        }
+    }
+
+    // 3️⃣ 跳播放器
     if (url) {
+        let scheme = "senplayer://play?url=" + encodeURIComponent(url);
 
-        // ✅ 必加 referer（否则很多时候播放失败）
-        let scheme = "senplayer://play?url=" 
-            + encodeURIComponent(url) ;
-
-       $notify("Hanime")
-
-          ,$openURL(
-scheme);
-        
+        $notify("Hanime", "1080P播放", url);
+        $openURL(scheme);
     }
 
 } catch (e) {
     console.log("error: " + e);
 }
 
+// 必须放行页面
 $done({});
