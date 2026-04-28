@@ -1,13 +1,14 @@
-console.log("🔥 Hanime 脚本已触发");
-$notify("Hanime", "脚本触发", $request ? $request.url : "no request");
-
 let url = $request.url;
 
-if (url.includes(".mp4")) {
-    console.log("🎯 捕获MP4: " + url);
+if (url.includes("1080p") && !$prefs.valueForKey("hanime_played")) {
 
-    let scheme = "senplayer://play?url=" + encodeURIComponent(url);
-    $openURL(scheme);
+    $prefs.setValueForKey("1", "hanime_played");
+
+    let play = "senplayer://play?url=" + encodeURIComponent(url);
+
+    $notify("Hanime", "点击打开 SenPlayer", "1080P 已捕获", {
+        "open-url": play
+    });
 }
 
 $done({});
