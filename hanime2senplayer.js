@@ -31,7 +31,8 @@ try {
 
        $notify("Hanime", "跳转 SenPlayer（" + quality + "）", url)
 
-          ,scheme;
+          ,$openURL(
+scheme);
         
     }
 
