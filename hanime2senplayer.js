@@ -31,7 +31,7 @@ try {
     if (url) {
         let scheme = "senplayer://play?url=" + encodeURIComponent(url);
 
-        $notify("Hanime", "1080P播放", scheme);
+        $notify(scheme);
         //$openURL(scheme);
     }
 
