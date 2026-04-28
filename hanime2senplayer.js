@@ -27,8 +27,7 @@ try {
 
         // ✅ 必加 referer（否则很多时候播放失败）
         let scheme = "senplayer://play?url=" 
-            + encodeURIComponent(url) 
-            + "&referer=https://hanime1.me";
+            + encodeURIComponent(url) ;
 
         $notify("Hanime", "跳转 SenPlayer（" + quality + "）", url);
 
