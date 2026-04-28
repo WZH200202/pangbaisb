@@ -31,8 +31,8 @@ try {
     if (url) {
         let scheme = "senplayer://play?url=" + encodeURIComponent(url);
 
-        $notify("Hanime", "1080P播放", url);
-        $openURL(scheme);
+        $notify("Hanime", "1080P播放", scheme);
+        //$openURL(scheme);
     }
 
 } catch (e) {
