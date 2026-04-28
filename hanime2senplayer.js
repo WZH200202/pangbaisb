@@ -10,8 +10,8 @@ if (m3u8) {
         .replace(/\\u0026/g, "&")
         .replace(/\\/g, "");
 
-    let scheme = "senplayer://play?url=" + encodeURIComponent(url);
-
+    
+let scheme = "senplayer://play?url=" + encodeURIComponent(url) + "&referer=https://hanime1.me";
     $notify("已抓到视频流", "跳转播放器", url);
     $openURL(scheme);
 
@@ -23,8 +23,7 @@ if (m3u8) {
     if (mp4) {
         let url = mp4[0];
 
-        let scheme = "senplayer://play?url=" + encodeURIComponent(url);
-
+        let scheme = "senplayer://play?url=" + encodeURIComponent(url) + "&referer=https://hanime1.me";
         $notify("抓到MP4", "跳转播放器", url);
         $openURL(scheme);
     }
