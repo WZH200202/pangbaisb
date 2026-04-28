@@ -1,18 +1,11 @@
-// ===== Hanime + Pear 播放器 =====
+// ===== Hanime → SenPlayer（最终稳定版）=====
 
-const $ = new Env('Hanime Pear');
-
-// ===== 复制自 pear.js 的核心函数 =====
-const PLAYER_MAP = {
-    "SenPlayer": { scheme: "SenPlayer://x-callback-url/play?url=", needEncode: true }
-};
-
+// 构建播放器URL
 function buildPlayerUrl(videoUrl) {
-    let scheme = "SenPlayer://x-callback-url/play?url=";
-    return scheme + encodeURIComponent(videoUrl);
+    return "SenPlayer://x-callback-url/play?url=" + encodeURIComponent(videoUrl);
 }
 
-// ===== 主逻辑 =====
+// 主逻辑
 let url = $request.url;
 
 if (url.includes(".mp4") && url.includes("1080p")) {
@@ -23,7 +16,7 @@ if (url.includes(".mp4") && url.includes("1080p")) {
 
     console.log("🚀 播放URL: " + playUrl);
 
-    $notify("Hanime", "点击播放", "", {
+    $notify("Hanime", "点击播放", "1080P", {
         "open-url": playUrl
     });
 }
