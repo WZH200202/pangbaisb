@@ -1,13 +1,17 @@
+// ===== Hanime → 调用 insav 播放 =====
+
 let url = $request.url;
 
-if (url.includes("1080p") && !$prefs.valueForKey("hanime_played")) {
+if (url.includes("1080p")) {
 
-    $prefs.setValueForKey("1", "hanime_played");
+    console.log("🎯 捕获MP4: " + url);
 
-    let play = "senplayer://play?url=" + encodeURIComponent(url);
+    // 👇 关键：写入 BoxJS 变量（insav会读取）
+    $prefs.setValueForKey(url, "insav_video_url");
 
-    $notify("Hanime", "点击打开 SenPlayer", "1080P 已捕获", {
-        "open-url": play
+    // 👇 触发 insav（通过通知点击）
+    $notify("Hanime", "点击调用播放器", "1080P已捕获", {
+        "open-url": "insav://play"
     });
 }
 
