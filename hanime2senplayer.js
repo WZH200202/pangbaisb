@@ -1,17 +1,30 @@
-// ===== Hanime → 调用 insav 播放 =====
+// ===== Hanime + Pear 播放器 =====
 
+const $ = new Env('Hanime Pear');
+
+// ===== 复制自 pear.js 的核心函数 =====
+const PLAYER_MAP = {
+    "SenPlayer": { scheme: "SenPlayer://x-callback-url/play?url=", needEncode: true }
+};
+
+function buildPlayerUrl(videoUrl) {
+    let scheme = "SenPlayer://x-callback-url/play?url=";
+    return scheme + encodeURIComponent(videoUrl);
+}
+
+// ===== 主逻辑 =====
 let url = $request.url;
 
-if (url.includes("1080p")) {
+if (url.includes(".mp4") && url.includes("1080p")) {
 
     console.log("🎯 捕获MP4: " + url);
 
-    // 👇 关键：写入 BoxJS 变量（insav会读取）
-    $prefs.setValueForKey(url, "insav_video_url");
+    let playUrl = buildPlayerUrl(url);
 
-    // 👇 触发 insav（通过通知点击）
-    $notify("Hanime", "点击调用播放器", "1080P已捕获", {
-        "open-url": "insav://play"
+    console.log("🚀 播放URL: " + playUrl);
+
+    $notify("Hanime", "点击播放", "", {
+        "open-url": playUrl
     });
 }
 
