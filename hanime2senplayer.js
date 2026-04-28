@@ -1,20 +1,17 @@
-// ===== Hanime → SenPlayer（最终稳定版）=====
+// ===== Hanime HTML解析版 =====
 
-// 构建播放器URL
-function buildPlayerUrl(videoUrl) {
-    return "SenPlayer://x-callback-url/play?url=" + encodeURIComponent(videoUrl);
-}
+let body = $response.body;
 
-// 主逻辑
-let url = $request.url;
+// 提取1080p mp4
+let match = body.match(/https:\/\/vdownload\.hembed\.com\/.*1080p.*\.mp4.*/);
 
-if (url.includes(".mp4") && url.includes("1080p")) {
+if (match) {
 
-    console.log("🎯 捕获MP4: " + url);
+    let url = match[0];
 
-    let playUrl = buildPlayerUrl(url);
+    console.log("🎯 提取到视频:", url);
 
-    console.log("🚀 播放URL: " + playUrl);
+    let playUrl = "SenPlayer://x-callback-url/play?url=" + encodeURIComponent(url);
 
     $notify("Hanime", "点击播放", "1080P", {
         "open-url": playUrl
