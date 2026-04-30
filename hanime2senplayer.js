@@ -31,8 +31,7 @@ try {
     if (url) {
         let scheme = "senplayer://play?url=" + encodeURIComponent(url);
 
-        $notify(scheme);
-        //$openURL(scheme);
+       $notify("点击播放", "", scheme);
     }
 
 } catch (e) {
