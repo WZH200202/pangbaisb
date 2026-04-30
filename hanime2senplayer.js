@@ -31,7 +31,10 @@ try {
     if (url) {
         let scheme = "senplayer://play?url=" + encodeURIComponent(url);
 
-       $notify("点击播放", "", scheme);
+     $notify("发现视频", "点击播放", "", {
+  "open-url": scheme
+});
+console.log("最终URL: " + url);
     }
 
 } catch (e) {
