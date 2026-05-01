@@ -34,7 +34,7 @@ try {
      $notify("发现视频", "点击播放", "", {
   "open-url": scheme
 });
-console.log("最终URL: " + url);
+console.log("最终URL: " + scheme );
     }
 
 } catch (e) {
